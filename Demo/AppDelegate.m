@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 
+extern void SACLockScreenImmediate ( );
+
 static NSString *const MASCustomShortcutKey = @"customShortcut";
 static NSString *const MASCustomShortcutEnabledKey = @"customShortcutEnabled";
 static NSString *const MASHardcodedShortcutEnabledKey = @"hardcodedShortcutEnabled";
@@ -50,11 +52,7 @@ static void *MASObservingContext = &MASObservingContext;
 
 - (void)playShortcutFeedback
 {
-    [[NSSound soundNamed:@"Ping"] play];
-    [_feedbackTextField setStringValue:NSLocalizedString(@"Shortcut pressed!", @"Feedback that’s displayed when user presses the sample shortcut.")];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [_feedbackTextField setStringValue:@""];
-    });
+    SACLockScreenImmediate();
 }
 
 // Handle changes in user defaults. We have to check keyPath here to see which of the
