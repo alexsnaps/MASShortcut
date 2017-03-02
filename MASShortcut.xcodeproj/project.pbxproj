@@ -44,12 +44,18 @@
 		0DC2F190199372B4003A0131 /* MASDictionaryTransformerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC2F18F199372B4003A0131 /* MASDictionaryTransformerTests.m */; };
 		0DC2F19819938EFA003A0131 /* MASShortcutView+Bindings.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC2F19619938EFA003A0131 /* MASShortcutView+Bindings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC2F19919938EFA003A0131 /* MASShortcutView+Bindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC2F19719938EFA003A0131 /* MASShortcutView+Bindings.m */; };
-		A2F245F81E624E71005A4B08 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F245F71E624E71005A4B08 /* login.framework */; };
 		A2F245F91E624EBE005A4B08 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F245F71E624E71005A4B08 /* login.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		0D827D8E19910AFF0010B8EF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0D827CCA1990D4420010B8EF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0D827CD21990D4420010B8EF;
+			remoteInfo = MASShortcut;
+		};
+		ABDE3A361E6883E00026ED0D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0D827CCA1990D4420010B8EF /* Project object */;
 			proxyType = 1;
@@ -143,7 +149,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A2F245F81E624E71005A4B08 /* login.framework in Frameworks */,
 				0D827CD71990D4420010B8EF /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -351,6 +356,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				ABDE3A371E6883E00026ED0D /* PBXTargetDependency */,
 			);
 			name = LockScreen;
 			productName = Demo;
@@ -390,7 +396,7 @@
 					};
 					0D827D361990D5E70010B8EF = {
 						DevelopmentTeam = N5KX87Q8GV;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 					0D827D8219910AFF0010B8EF = {
 						TestTargetID = 0D827CD21990D4420010B8EF;
@@ -500,6 +506,11 @@
 			isa = PBXTargetDependency;
 			target = 0D827CD21990D4420010B8EF /* MASShortcut */;
 			targetProxy = 0D827D8E19910AFF0010B8EF /* PBXContainerItemProxy */;
+		};
+		ABDE3A371E6883E00026ED0D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0D827CD21990D4420010B8EF /* MASShortcut */;
+			targetProxy = ABDE3A361E6883E00026ED0D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -729,6 +740,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = Demo/Prefix.pch;
 				INFOPLIST_FILE = Demo/Info.plist;
+				"LD_RUNPATH_SEARCH_PATHS[arch=*]" = "@loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "net.codespot.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = LockScreen;

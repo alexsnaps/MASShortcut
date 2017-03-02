@@ -23,12 +23,11 @@ static void *MASObservingContext = &MASObservingContext;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
 	// Most apps need default shortcut, delete these lines if this is not your case
-	MASShortcut *firstLaunchShortcut = [MASShortcut shortcutWithKeyCode:kVK_F1 modifierFlags:NSEventModifierFlagCommand];
+	MASShortcut *firstLaunchShortcut = [MASShortcut shortcutWithKeyCode:kVK_Escape modifierFlags:NSEventModifierFlagCommand];
 	NSData *firstLaunchShortcutData = [NSKeyedArchiver archivedDataWithRootObject:firstLaunchShortcut];
 
     // Register default values to be used for the first app start
     [defaults registerDefaults:@{
-        MASHardcodedShortcutEnabledKey : @YES,
         MASCustomShortcutEnabledKey : @YES,
 		MASCustomShortcutKey : firstLaunchShortcutData
     }];
@@ -46,9 +45,6 @@ static void *MASObservingContext = &MASObservingContext;
     [defaults addObserver:self forKeyPath:MASCustomShortcutEnabledKey
         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
         context:MASObservingContext];
-    [defaults addObserver:self forKeyPath:MASHardcodedShortcutEnabledKey
-        options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
-        context:MASObservingContext];
 
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
 
@@ -63,10 +59,15 @@ static void *MASObservingContext = &MASObservingContext;
 
 - (IBAction)lockComputer:(id)sender
 {
+    if (_preferenceWindow.visible) {
+        [_preferenceWindow setIsVisible:NO];
+    }
     SACLockScreenImmediate();
 }
 
-- (IBAction)showPreferences:(id)sender {
+- (IBAction)showPreferences:(id)sender
+{
+    [NSApp activateIgnoringOtherApps:YES];
     [_preferenceWindow makeKeyAndOrderFront:sender];
 }
 
@@ -80,35 +81,9 @@ static void *MASObservingContext = &MASObservingContext;
         return;
     }
 
-    BOOL newValue = [[change objectForKey:NSKeyValueChangeNewKey] boolValue];
-    if ([keyPath isEqualToString:MASCustomShortcutEnabledKey]) {
-        [self setCustomShortcutEnabled:newValue];
-    } else if ([keyPath isEqualToString:MASHardcodedShortcutEnabledKey]) {
-        [self setHardcodedShortcutEnabled:newValue];
-    }
-}
-
-- (void) setCustomShortcutEnabled: (BOOL) enabled
-{
-    if (enabled) {
-        [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:MASCustomShortcutKey toAction:^{
-            [self lockComputer:nil];
-        }];
-    } else {
-        [[MASShortcutBinder sharedBinder] breakBindingWithDefaultsKey:MASCustomShortcutKey];
-    }
-}
-
-- (void) setHardcodedShortcutEnabled: (BOOL) enabled
-{
-    MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:kVK_F2 modifierFlags:NSEventModifierFlagCommand];
-    if (enabled) {
-        [[MASShortcutMonitor sharedMonitor] registerShortcut:shortcut withAction:^{
-            [self lockComputer:nil];
-        }];
-    } else {
-        [[MASShortcutMonitor sharedMonitor] unregisterShortcut:shortcut];
-    }
+    [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:MASCustomShortcutKey toAction:^{
+        [self lockComputer:nil];
+    }];
 }
 
 #pragma mark NSApplicationDelegate
