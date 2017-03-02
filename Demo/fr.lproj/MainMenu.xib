@@ -676,6 +676,8 @@
         <customObject id="494" customClass="AppDelegate">
             <connections>
                 <outlet property="customShortcutView" destination="536" id="aO6-hh-1vm"/>
+                <outlet property="menu" destination="XMY-BE-PuD" id="Cej-1S-fGv"/>
+                <outlet property="preferenceWindow" destination="371" id="mjU-Vg-ijn"/>
                 <outlet property="window" destination="371" id="532"/>
             </connections>
         </customObject>
@@ -685,13 +687,22 @@
             <items>
                 <menuItem title="Vérouiller" id="zfs-Il-NtT">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="lockComputer:" target="494" id="kRf-lB-dQS"/>
+                    </connections>
                 </menuItem>
                 <menuItem isSeparatorItem="YES" id="E22-lE-euS"/>
                 <menuItem title="Préférences…" id="bNu-v9-qXC">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="showPreferences:" target="494" id="w4d-u2-mKq"/>
+                    </connections>
                 </menuItem>
                 <menuItem title="Quitter" id="Thn-Jg-fdS">
                     <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="terminate:" target="-2" id="TwV-by-2dm"/>
+                    </connections>
                 </menuItem>
             </items>
             <point key="canvasLocation" x="76.5" y="152.5"/>
