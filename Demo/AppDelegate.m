@@ -4,7 +4,6 @@ extern void SACLockScreenImmediate();
 
 static NSString *const MASCustomShortcutKey = @"customShortcut";
 static NSString *const MASCustomShortcutEnabledKey = @"customShortcutEnabled";
-static NSString *const MASHardcodedShortcutEnabledKey = @"hardcodedShortcutEnabled";
 
 static void *MASObservingContext = &MASObservingContext;
 
@@ -22,39 +21,32 @@ static void *MASObservingContext = &MASObservingContext;
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
-	// Most apps need default shortcut, delete these lines if this is not your case
-	MASShortcut *firstLaunchShortcut = [MASShortcut shortcutWithKeyCode:kVK_Escape modifierFlags:NSEventModifierFlagCommand];
-	NSData *firstLaunchShortcutData = [NSKeyedArchiver archivedDataWithRootObject:firstLaunchShortcut];
+    BOOL showPrefs = [defaults objectForKey:MASCustomShortcutKey] == nil;
 
-    // Register default values to be used for the first app start
-    [defaults registerDefaults:@{
-        MASCustomShortcutEnabledKey : @YES,
-		MASCustomShortcutKey : firstLaunchShortcutData
-    }];
+    if (showPrefs) {
+        MASShortcut *firstLaunchShortcut = [MASShortcut shortcutWithKeyCode:kVK_Escape modifierFlags:NSEventModifierFlagCommand];
+        NSData *firstLaunchShortcutData = [NSKeyedArchiver archivedDataWithRootObject:firstLaunchShortcut];
 
-    // Bind the shortcut recorder view’s value to user defaults.
-    // Run “defaults read com.shpakovski.mac.Demo” to see what’s stored
-    // in user defaults.
+        [defaults registerDefaults:@{
+                MASCustomShortcutEnabledKey : @YES,
+                MASCustomShortcutKey : firstLaunchShortcutData
+        }];
+    }
+
     [_customShortcutView setAssociatedUserDefaultsKey:MASCustomShortcutKey];
 
-    // Enable or disable the recorder view according to the first checkbox state
-    [_customShortcutView bind:@"enabled" toObject:defaults
-        withKeyPath:MASCustomShortcutEnabledKey options:nil];
-
-    // Watch user defaults for changes in the checkbox states
     [defaults addObserver:self forKeyPath:MASCustomShortcutEnabledKey
         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
         context:MASObservingContext];
 
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-
     self.statusBar.title = @"L";
-
-    // you can also set an image
-    //self.statusBar.image =
-
     self.statusBar.menu = self.menu;
     self.statusBar.highlightMode = YES;
+
+    if (showPrefs) {
+       [self showPreferences:nil];
+    }
 }
 
 - (IBAction)lockComputer:(id)sender
@@ -71,9 +63,6 @@ static void *MASObservingContext = &MASObservingContext;
     [_preferenceWindow makeKeyAndOrderFront:sender];
 }
 
-// Handle changes in user defaults. We have to check keyPath here to see which of the
-// two checkboxes was changed. This is not very elegant, in practice you could use something
-// like https://github.com/facebook/KVOController with a nicer API.
 - (void) observeValueForKeyPath: (NSString*) keyPath ofObject: (id) object change: (NSDictionary*) change context: (void*) context
 {
     if (context != MASObservingContext) {
