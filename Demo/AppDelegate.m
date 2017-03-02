@@ -1,6 +1,6 @@
 #import "AppDelegate.h"
 
-extern void SACLockScreenImmediate ( );
+extern void SACLockScreenImmediate();
 
 static NSString *const MASCustomShortcutKey = @"customShortcut";
 static NSString *const MASCustomShortcutEnabledKey = @"customShortcutEnabled";
@@ -9,8 +9,9 @@ static NSString *const MASHardcodedShortcutEnabledKey = @"hardcodedShortcutEnabl
 static void *MASObservingContext = &MASObservingContext;
 
 @interface AppDelegate ()
+@property (unsafe_unretained) IBOutlet NSWindow *preferenceWindow;
 @property(strong) IBOutlet MASShortcutView *customShortcutView;
-@property(strong) IBOutlet NSTextField *feedbackTextField;
+@property(unsafe_unretained) IBOutlet NSMenu *menu;
 @end
 
 @implementation AppDelegate
@@ -48,11 +49,25 @@ static void *MASObservingContext = &MASObservingContext;
     [defaults addObserver:self forKeyPath:MASHardcodedShortcutEnabledKey
         options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew
         context:MASObservingContext];
+
+    self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
+
+    self.statusBar.title = @"L";
+
+    // you can also set an image
+    //self.statusBar.image =
+
+    self.statusBar.menu = self.menu;
+    self.statusBar.highlightMode = YES;
 }
 
-- (void)playShortcutFeedback
+- (IBAction)lockComputer:(id)sender
 {
     SACLockScreenImmediate();
+}
+
+- (IBAction)showPreferences:(id)sender {
+    [_preferenceWindow makeKeyAndOrderFront:sender];
 }
 
 // Handle changes in user defaults. We have to check keyPath here to see which of the
@@ -77,7 +92,7 @@ static void *MASObservingContext = &MASObservingContext;
 {
     if (enabled) {
         [[MASShortcutBinder sharedBinder] bindShortcutWithDefaultsKey:MASCustomShortcutKey toAction:^{
-            [self playShortcutFeedback];
+            [self lockComputer:nil];
         }];
     } else {
         [[MASShortcutBinder sharedBinder] breakBindingWithDefaultsKey:MASCustomShortcutKey];
@@ -89,7 +104,7 @@ static void *MASObservingContext = &MASObservingContext;
     MASShortcut *shortcut = [MASShortcut shortcutWithKeyCode:kVK_F2 modifierFlags:NSEventModifierFlagCommand];
     if (enabled) {
         [[MASShortcutMonitor sharedMonitor] registerShortcut:shortcut withAction:^{
-            [self playShortcutFeedback];
+            [self lockComputer:nil];
         }];
     } else {
         [[MASShortcutMonitor sharedMonitor] unregisterShortcut:shortcut];
@@ -100,7 +115,7 @@ static void *MASObservingContext = &MASObservingContext;
 
 - (BOOL) applicationShouldTerminateAfterLastWindowClosed: (NSApplication*) sender
 {
-    return YES;
+    return NO;
 }
 
 @end

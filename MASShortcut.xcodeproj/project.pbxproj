@@ -78,7 +78,6 @@
 		0D2CAB171B8339F4005431FC /* MASLocalization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MASLocalization.h; path = Framework/MASLocalization.h; sourceTree = "<group>"; };
 		0D2CAB181B8339F4005431FC /* MASLocalization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASLocalization.m; path = Framework/MASLocalization.m; sourceTree = "<group>"; };
 		0D2CAB1C1B83409C005431FC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		0D2CAB1E1B8340A4005431FC /* cs */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = cs; path = cs.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		0D2CAB221B834464005431FC /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0D2CAB241B834467005431FC /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0D39DCA11A668A4400639145 /* MASHotKeyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MASHotKeyTests.m; path = Framework/MASHotKeyTests.m; sourceTree = "<group>"; };
@@ -134,6 +133,7 @@
 		76A0597D1C51DC940014B271 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		76A0597E1C51DC9F0014B271 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A2F245F71E624E71005A4B08 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
+		AB698AEA1E68661900C41576 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		EAFFDC811AACFF3300F38834 /* MASShortcut.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = MASShortcut.modulemap; path = Framework/MASShortcut.modulemap; sourceTree = "<group>"; };
 		ED8737791BCE459800BB1716 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -520,7 +520,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				0D2CAB1C1B83409C005431FC /* en */,
-				0D2CAB1E1B8340A4005431FC /* cs */,
+				AB698AEA1E68661900C41576 /* fr */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
