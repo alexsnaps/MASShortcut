@@ -45,6 +45,7 @@
 		0DC2F19819938EFA003A0131 /* MASShortcutView+Bindings.h in Headers */ = {isa = PBXBuildFile; fileRef = 0DC2F19619938EFA003A0131 /* MASShortcutView+Bindings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0DC2F19919938EFA003A0131 /* MASShortcutView+Bindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 0DC2F19719938EFA003A0131 /* MASShortcutView+Bindings.m */; };
 		A2F245F91E624EBE005A4B08 /* login.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2F245F71E624E71005A4B08 /* login.framework */; };
+		ABDE3A3E1E689CA50026ED0D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABDE3A3D1E689CA50026ED0D /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		76A0597E1C51DC9F0014B271 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A2F245F71E624E71005A4B08 /* login.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = login.framework; path = ../../../../System/Library/PrivateFrameworks/login.framework; sourceTree = "<group>"; };
 		AB698AEA1E68661900C41576 /* fr */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = fr; path = fr.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		ABDE3A3D1E689CA50026ED0D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = LockScreen/Images.xcassets; sourceTree = "<group>"; };
 		EAFFDC811AACFF3300F38834 /* MASShortcut.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = MASShortcut.modulemap; path = Framework/MASShortcut.modulemap; sourceTree = "<group>"; };
 		ED8737791BCE459800BB1716 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -177,6 +179,7 @@
 		0D827CC91990D4420010B8EF = {
 			isa = PBXGroup;
 			children = (
+				ABDE3A3D1E689CA50026ED0D /* Images.xcassets */,
 				0D827D151990D4D70010B8EF /* Framework */,
 				0D827D8519910AFF0010B8EF /* Test Support */,
 				0D827D681990D6110010B8EF /* Demo */,
@@ -448,6 +451,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D2CAB1B1B83409C005431FC /* MainMenu.xib in Resources */,
+				ABDE3A3E1E689CA50026ED0D /* Images.xcassets in Resources */,
 				0D2CAB211B834464005431FC /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
