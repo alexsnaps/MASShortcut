@@ -40,7 +40,7 @@ static void *MASObservingContext = &MASObservingContext;
         context:MASObservingContext];
 
     self.statusBar = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    self.statusBar.title = @"L";
+    self.statusBar.title = @"\U0001F512";
     self.statusBar.menu = self.menu;
     self.statusBar.highlightMode = YES;
 
